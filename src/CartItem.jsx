@@ -1,9 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, updateQuantity } from './CartSlice';
 import './CartItem.css';
-import { addItem } from './CartSlice';
-
+import { updateQuantity, removeItem } from './CartSlice';
 
 const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
@@ -11,16 +9,26 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
- 
+    let totalSum = 0;
+
+    for(let i = 0; i < cart.length; i++) {
+        totalSum += cart[i].quantity * parseInt(cart[i].cost.replace(/[$,]+/g,""));
+    };
+    return totalSum;
+  };
+
+  const handleCheckoutShopping = (e) => {
+    alert('Functionality to be added for future reference');
   };
 
   const handleContinueShopping = (e) => {
-   
+    // onContinueShopping(); // parentheses may be unnecessary
   };
 
 
 
   const handleIncrement = (item) => {
+
   };
 
   const handleDecrement = (item) => {
@@ -28,6 +36,7 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleRemove = (item) => {
+
   };
 
   // Calculate total cost based on quantity for an item
@@ -66,5 +75,3 @@ const CartItem = ({ onContinueShopping }) => {
 };
 
 export default CartItem;
-
-
